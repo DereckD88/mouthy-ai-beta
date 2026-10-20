@@ -3,249 +3,785 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090711">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="MOUTHY AI">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="icon" href="assets/favicon.png">
-<title>MOUTHY AI — Beta</title>
+<meta name="theme-color" content="#212121">
+<title>MOUTHY AI — After Dark</title>
 <style>
-:root{color-scheme:dark;--bg:#090711;--panel:#151221;--line:#332743;--pink:#ff35d3;--blue:#39caff;--text:#f8f5ff;--muted:#aaa2bc;--green:#7cf7bd}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 8% 0%,#35103c 0,transparent 36%),radial-gradient(ellipse at 100% 12%,#092d4a 0,transparent 35%),var(--bg);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);min-height:100vh}
-button,input,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:11px 14px;background:#211a30;color:var(--text)}button:hover{border-color:var(--pink)}button.primary{background:linear-gradient(100deg,#ff27c8,#7a42ff);border:0;font-weight:800}button.ghost{background:transparent}
-.small{font-size:12px;color:var(--muted)}.muted{color:var(--muted)}.hidden{display:none!important}.wrap{max-width:1000px;margin:auto;padding:16px}.brand{display:flex;align-items:center;gap:12px}.brand img{width:48px;height:48px;object-fit:cover;border-radius:14px;border:1px solid #7944b6;box-shadow:0 0 20px #e22dca33}.brand h1{font-size:18px;line-height:1;margin:0;letter-spacing:1px}.brand small{color:var(--muted)}header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.pill{border:1px solid #49305b;border-radius:99px;padding:5px 10px;color:#e7b8ff;font-size:12px}.card{background:linear-gradient(145deg,#171323f2,#100d1bf5);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 40px #0003}.gradient{background:linear-gradient(90deg,#ff58d7,#8c8cff,#4bd8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero{display:grid;grid-template-columns:1fr .85fr;gap:18px;align-items:stretch}.login-simple{max-width:460px;margin:7vh auto 0;align-items:stretch}.login-simple>img{align-self:center;width:78px;height:78px}.hero h2{font-size:clamp(30px,5vw,48px);line-height:1.03;margin:10px 0}.hero p{color:#c4bbd2}.loginbox{display:flex;flex-direction:column;justify-content:center;gap:12px}.loginbox img{width:86px;height:86px;border-radius:22px;object-fit:cover;box-shadow:0 0 35px #ed36d455}.field{display:grid;gap:6px}.field label{font-size:12px;color:#c5bad6}.field input,.field textarea{width:100%;padding:12px;border:1px solid #453552;background:#0d0a15;color:white;border-radius:12px;outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--pink)}
-.chat-shell{display:flex;flex-direction:column;min-height:72vh;max-height:calc(100vh - 130px);overflow:hidden}.chat-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line)}.chat-scroll{flex:1;overflow:auto;padding:16px 2px;display:flex;flex-direction:column;gap:14px}.bubble{max-width:min(84%,700px);padding:12px 15px;border-radius:17px;white-space:pre-wrap;overflow-wrap:anywhere}.bubble.ai{align-self:flex-start;background:#1b1528;border:1px solid #382547;border-bottom-left-radius:5px}.bubble.user{align-self:flex-end;background:linear-gradient(120deg,#6c2384,#303d8e);border-bottom-right-radius:5px}.bubble .speaker{font-size:11px;color:#e9a9ff;font-weight:800;letter-spacing:.5px;margin-bottom:4px}.composer{border-top:1px solid var(--line);padding-top:12px}.composer-row{display:flex;gap:9px;align-items:flex-end}.composer textarea{resize:none;min-height:48px;max-height:150px;flex:1;min-width:0;background:#0d0a15;color:white;border:1px solid #453552;border-radius:14px;padding:12px;outline:none}.composer textarea:focus{border-color:var(--pink)}.attach-button{flex:0 0 auto;width:48px;height:48px;padding:0;display:grid;place-items:center;font-size:23px;border-radius:14px}.attach-button:focus-visible{outline:2px solid var(--pink);outline-offset:2px}.attachment-tray{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}.attachment-chip{display:flex;align-items:center;gap:8px;max-width:100%;padding:7px 9px;border:1px solid #453552;background:#100d1b;border-radius:12px;font-size:12px}.attachment-chip img{width:42px;height:42px;object-fit:cover;border-radius:8px}.attachment-name{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.attachment-remove{padding:3px 7px;border-radius:8px;color:#ffb6eb}.message-attachments{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}.message-attachment{max-width:220px;border:1px solid #453552;border-radius:10px;overflow:hidden;background:#100d1b;padding:7px;font-size:12px}.message-attachment img{display:block;max-width:200px;max-height:200px;object-fit:contain;border-radius:7px;margin-bottom:5px}.hint{font-size:11px;color:var(--muted);margin-top:8px}.admin-panel{border:1px solid #7c3a95;background:linear-gradient(120deg,#30143c,#15172b);border-radius:16px;padding:14px;margin-bottom:14px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}.stat{padding:14px;background:#ffffff06;border:1px solid #30243e;border-radius:14px}.stat b{font-size:23px;display:block}.list{display:grid;gap:8px}.member{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px}.tag{font-size:11px;padding:4px 8px;border-radius:8px;background:#163c32;color:var(--green)}.notice{border:1px solid #7e592a;background:#2b2013;padding:12px;border-radius:12px;color:#f6d9a7;font-size:12px}.footer{padding:20px 0;color:var(--muted);font-size:12px;text-align:center}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#251b32;border:1px solid #9a55bc;padding:10px 15px;border-radius:12px;display:none;z-index:5;max-width:90vw}
-@media(max-width:700px){.wrap{padding:10px}.login-simple{margin:6vh auto 0}.hero{grid-template-columns:1fr}.chat-shell{min-height:75vh;max-height:calc(100dvh - 112px);padding:12px}.bubble{max-width:94%}.composer-row button{padding:11px}.stats{gap:6px}.stat{padding:9px}.stat b{font-size:19px}}
-
-/* ChatGPT-inspired interface refresh: presentation only; preserve app features and role logic. */
-:root{color-scheme:dark;--bg:#212121;--panel:#171717;--line:#343434;--pink:#c77dff;--blue:#81b9ff;--text:#ececec;--muted:#a3a3a3;--green:#8de0b0}
-html,body{min-height:100%;}body{background:#212121;color:var(--text);font-size:14px;line-height:1.55}
-button{border-color:transparent;background:transparent;border-radius:10px;transition:background .15s ease,border-color .15s ease;color:#ececec}button:hover{border-color:transparent;background:#2b2b2b}button.primary{background:#ececec;color:#171717;font-weight:700}button.primary:hover{background:#fff}
-.small,.muted{color:#a3a3a3}.pill{border-color:#474747;color:#d6c4eb;background:#242424}.card{background:#212121;border-color:#343434;box-shadow:none;border-radius:14px}.gradient{background:linear-gradient(90deg,#f0b5ff,#b8a5ff,#a2d8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-body.chat-active{height:100dvh;overflow:hidden}body.chat-active>.wrap{max-width:none;width:100%;height:100dvh;padding:0;margin:0}body.chat-active>.wrap>header,body.chat-active>.wrap>.footer{display:none}
-#appView:not(.hidden){display:grid;grid-template-columns:260px minmax(0,1fr);align-items:stretch;width:100%;height:100dvh;min-height:0;background:#212121;overflow:hidden}
-.chat-sidebar{grid-column:1;grid-row:1;background:#171717;border-right:1px solid #292929;min-width:0;height:100%;display:flex;flex-direction:column;padding:14px 12px 10px;gap:8px;z-index:30;overflow:hidden}
-.sidebar-brand{height:42px;display:flex;align-items:center;gap:10px;padding:0 7px 10px;font-size:16px;letter-spacing:.15px;font-weight:650}.sidebar-brand img{width:29px;height:29px;border-radius:9px;object-fit:cover}.sidebar-brand b{color:#dfb3ff}.sidebar-toggle{margin-left:auto;font-size:16px;padding:6px 8px;color:#adadad}
-.sidebar-action{display:flex;width:100%;align-items:center;gap:12px;text-align:left;padding:10px 11px;border:1px solid transparent;background:transparent;border-radius:10px;color:#dedede;font-weight:450;min-height:40px}.sidebar-action:hover{background:#242424}.sidebar-action .action-symbol{width:20px;display:inline-flex;justify-content:center;font-size:18px;color:#c7c7c7}.new-chat-action{border-color:#3b3b3b;background:#1e1e1e;margin:5px 0 13px}.new-chat-action:hover{background:#292929}.sidebar-section-label{padding:4px 11px;font-size:11px;letter-spacing:.08em;color:#858585;font-weight:700}.sidebar-current{display:flex;align-items:center;gap:10px;margin:0 1px;padding:10px 11px;border-radius:9px;background:#242424;color:#e7e7e7;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.current-dot{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#bb8cf1}.sidebar-bottom{margin-top:auto;display:flex;flex-direction:column;gap:3px;border-top:1px solid #2d2d2d;padding-top:10px}.sidebar-profile{display:flex;align-items:center;gap:10px;padding:12px 5px 2px;margin-top:5px;border-top:1px solid #2d2d2d;min-width:0}.sidebar-profile img{width:33px;height:33px;border-radius:50%;object-fit:cover;background:#292929}.profile-copy{min-width:0;display:flex;flex-direction:column;gap:1px;flex:1}.profile-copy b{font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.profile-copy small{font-size:11px;color:#969696;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.signout-button{font-size:20px;color:#a0a0a0;padding:5px 9px;flex:0 0 auto}
-.workspace{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:stretch;min-width:0;height:100%;overflow-y:auto;overflow-x:hidden;background:#212121;scroll-behavior:smooth}.chat-shell{width:100%;max-width:none;min-height:100dvh;height:100dvh;max-height:none;overflow:hidden;display:flex;flex-direction:column;background:#212121;border:0;border-radius:0;padding:0;box-shadow:none;flex:0 0 auto}
-.chat-top{height:58px;flex:0 0 58px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid #2d2d2d;background:#212121;gap:16px}.chat-heading{display:flex;align-items:center;gap:10px;min-width:0}.chat-heading img{width:30px!important;height:30px!important;border-radius:9px!important;object-fit:cover}.chat-heading b{font-size:14px;font-weight:650}.chat-heading .small{font-size:11px;line-height:1.3}.topbar-status{font-size:12px;color:#888;white-space:nowrap}.topbar-status span{color:#bc8cf2;margin:0 5px}.mobile-sidebar-toggle{display:none}
-.chat-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:24px 24px 34px;display:flex;flex-direction:column;gap:22px;scrollbar-color:#474747 transparent;scrollbar-width:thin}.bubble{white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.72}.bubble .speaker{display:none}.bubble.ai{align-self:center;width:min(100%,790px);max-width:790px;padding:6px 2px 12px;margin:0 auto;background:transparent;border:0;border-radius:0;box-shadow:none}.bubble.user{align-self:flex-end;max-width:min(78%,680px);padding:10px 16px;background:#303030;border:1px solid #383838;color:#ececec;border-radius:22px;margin-right:max(0px,calc((100% - 790px)/2));}
-.message-attachments{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}.message-attachment{background:#282828;border:1px solid #454545;border-radius:12px}.message-attachment img{border-radius:9px}.composer{width:min(850px,calc(100% - 36px));flex:0 0 auto;margin:0 auto;padding:12px 0 16px;border-top:0;background:transparent}.attachment-tray{width:100%;padding:0 4px}.composer-row{display:flex;align-items:flex-end;gap:8px;padding:8px 10px;background:#2f2f2f;border:1px solid #454545;border-radius:28px;box-shadow:0 2px 10px #0002}.composer textarea{background:transparent;border:0;outline:none;color:#f4f4f4;min-height:42px;max-height:180px;padding:9px 5px;line-height:1.5;font:inherit}.composer textarea:focus{border:0}.composer textarea::placeholder{color:#a0a0a0}.attach-button{width:38px;height:38px;border-radius:50%;border:0;background:transparent;color:#d8d8d8;font-size:25px;flex:0 0 38px}.attach-button:hover{background:#454545}.composer-row #sendChat{width:38px;height:38px;padding:0;flex:0 0 38px;display:grid;place-items:center;border-radius:50%;font-size:23px;line-height:1;background:#f3f3f3;color:#171717}.hint{text-align:center;font-size:11px;color:#858585;line-height:1.45;margin:8px 12px 0}
-#customizePanel,#adminPanel{width:min(860px,calc(100% - 40px));margin:28px auto 64px!important;flex:0 0 auto}#welcomePanel{flex:0 0 auto}.workspace .card{background:#242424;border-color:#393939;border-radius:16px}.workspace .field input,.workspace .field textarea,.workspace .field select{background:#1b1b1b;border-color:#484848;color:#eee;border-radius:10px}.workspace .field input:focus,.workspace .field textarea:focus,.workspace .field select:focus{border-color:#b98ce8}.workspace button.primary{background:#e9e9e9;color:#151515}.workspace button.primary:hover{background:#fff}.admin-panel{background:#26212c;border-color:#4e3b5c}.stats .stat{background:#292929;border-color:#414141}.member{border-color:#404040;background:#282828}.tag{background:#20372c;color:#a8e5c0}.footer{display:none}
-/* Login keeps its existing behavior, with a simpler ChatGPT-like surface. */
-body:not(.chat-active) .wrap{max-width:none;min-height:100dvh;padding:0 18px 30px;background:#212121}body:not(.chat-active)> .wrap > header{max-width:1180px;margin:0 auto;padding:18px 8px 14px;border-bottom:1px solid #303030}body:not(.chat-active) .brand img{box-shadow:none;border:1px solid #3a3a3a}body:not(.chat-active) .login-simple{margin:8vh auto 0;background:#252525;border:1px solid #383838;border-radius:18px;padding:28px;box-shadow:none}body:not(.chat-active) .login-simple h2{font-size:28px;line-height:1.2;text-align:center}body:not(.chat-active) .login-simple>img{box-shadow:none;border-radius:18px;width:66px;height:66px}body:not(.chat-active) .login-simple p{text-align:center}body:not(.chat-active) .field input{background:#1b1b1b;border-color:#464646;border-radius:10px}body:not(.chat-active) .notice{border-color:#594c63;background:#2b2530;color:#d9cbe5}
-body.sidebar-collapsed #appView:not(.hidden){grid-template-columns:72px minmax(0,1fr)}body.sidebar-collapsed .chat-sidebar{padding-left:9px;padding-right:9px}body.sidebar-collapsed .sidebar-brand span,body.sidebar-collapsed .sidebar-section-label,body.sidebar-collapsed .sidebar-current span:not(.current-dot),body.sidebar-collapsed .sidebar-action span:not(.action-symbol),body.sidebar-collapsed .profile-copy,body.sidebar-collapsed .signout-button{display:none}body.sidebar-collapsed .sidebar-brand{justify-content:center;padding-left:0;padding-right:0}body.sidebar-collapsed .sidebar-toggle{display:inline-flex}body.sidebar-collapsed .sidebar-action{justify-content:center;padding:10px 4px}body.sidebar-collapsed .sidebar-action .action-symbol{font-size:20px}body.sidebar-collapsed .sidebar-current{justify-content:center;padding:11px 0}body.sidebar-collapsed .sidebar-profile{justify-content:center;padding-left:0;padding-right:0}
-@media(max-width:760px){#appView:not(.hidden){grid-template-columns:minmax(0,1fr)}.chat-sidebar{position:fixed;left:0;top:0;bottom:0;width:270px;transform:translateX(-105%);transition:transform .18s ease;box-shadow:10px 0 35px #0006}.sidebar-open .chat-sidebar{transform:translateX(0)}.sidebar-open:after{content:"";position:fixed;inset:0;background:#0007;z-index:20}.workspace{grid-column:1;grid-row:1}.chat-top{padding:0 13px}.mobile-sidebar-toggle{display:inline-grid;place-items:center;border:0;background:transparent;color:#cfcfcf;padding:7px;font-size:18px}.topbar-status{display:none}.chat-scroll{padding:20px 16px 28px}.bubble.ai{padding-left:0;padding-right:0}.bubble.user{max-width:88%;margin-right:0}.composer{width:calc(100% - 20px);padding-bottom:12px}.composer-row{gap:5px;padding:6px 7px}.attach-button{width:34px;height:34px;flex-basis:34px}.composer-row #sendChat{width:34px;height:34px;flex-basis:34px}.hint{font-size:10px;margin-left:4px;margin-right:4px}#customizePanel,#adminPanel{width:calc(100% - 20px);margin-top:14px!important}.stats{grid-template-columns:1fr}.login-simple{width:min(100%,460px)}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
-
+:root{color-scheme:dark;--bg:#212121;--sidebar:#171717;--panel:#2f2f2f;--panel2:#303030;--line:#424242;--text:#ececec;--muted:#a8a8a8;--accent:#b7a4ff;--danger:#ff7b86}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}
+button{color:inherit;border:1px solid var(--line);background:transparent;border-radius:12px;padding:9px 13px;cursor:pointer}
+button:hover{background:#ffffff0b}
+button:disabled{opacity:.5;cursor:not-allowed}
+.primary{background:#ececec;color:#202020;border-color:#ececec;font-weight:650}
+.primary:hover{background:#fff}
+.danger{color:#ff9aa3;border-color:#693b40}
+.hidden{display:none!important}
+.muted,.small{color:var(--muted)}
+.small{font-size:12px}
+.app{min-height:100dvh;display:flex}
+.sidebar{width:260px;flex:0 0 260px;background:var(--sidebar);padding:12px;display:flex;flex-direction:column;gap:12px;border-right:1px solid #ffffff08}
+.brand{font-weight:750;font-size:17px;letter-spacing:.2px;padding:8px 9px}
+.brand span{color:var(--accent)}
+.side-btn{text-align:left;width:100%;display:flex;gap:10px;align-items:center}
+.side-bottom{margin-top:auto;display:grid;gap:8px}
+.main{min-width:0;flex:1;display:flex;flex-direction:column;height:100dvh;position:relative}
+.topbar{height:58px;flex:0 0 58px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid #ffffff08}
+.top-left{display:flex;align-items:center;gap:10px}
+.menu-toggle{display:none}
+.content{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column}
+.chat{width:min(820px,100%);margin:0 auto;padding:26px 22px 24px;flex:1;display:flex;flex-direction:column;gap:26px}
+.welcome{margin:auto 0;min-height:48vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px}
+.welcome h1{font-size:clamp(28px,4vw,38px);font-weight:600;margin:0}
+.welcome p{margin:0;color:var(--muted);max-width:560px}
+.suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;width:min(600px,100%);margin-top:16px}
+.suggestion{text-align:left;background:#ffffff04;padding:13px 15px}
+.message{display:flex;gap:14px;align-items:flex-start}
+.avatar{width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:grid;place-items:center;background:#3c3c3c;font-size:12px;font-weight:800}
+.message.user .avatar{background:#675b8b}
+.message-body{min-width:0;flex:1;padding-top:3px;white-space:pre-wrap;overflow-wrap:anywhere}
+.message-body p{margin:0 0 10px}
+.message-body p:last-child{margin-bottom:0}
+.message-tools{display:flex;gap:6px;margin-top:8px}
+.message-tools button{font-size:12px;padding:4px 8px;color:var(--muted)}
+.composer-wrap{width:min(820px,100%);padding:0 22px 14px;margin:0 auto}
+.composer{border:1px solid #555;border-radius:24px;background:#2f2f2f;padding:10px 12px;box-shadow:0 6px 24px #0002}
+.composer textarea{display:block;width:100%;resize:none;min-height:32px;max-height:180px;background:transparent;color:var(--text);border:0;outline:0;padding:6px 7px}
+.composer-actions{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.actions-left,.actions-right{display:flex;gap:6px;align-items:center}
+.round{width:36px;height:36px;padding:0;border-radius:50%;display:grid;place-items:center}
+.send{background:#ececec;color:#222;border:0;font-size:19px}
+.fineprint{text-align:center;font-size:11px;color:#888;padding:0 10px 12px}
+.auth-screen{min-height:100dvh;display:grid;place-items:center;padding:20px;background:radial-gradient(ellipse at 50% 0%,#363044 0,transparent 45%),var(--bg)}
+.auth-card{width:min(440px,100%);background:#292929;border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 20px 70px #0003}
+.auth-card h1{font-size:28px;margin:0 0 6px}
+.auth-card p{color:var(--muted);margin:0 0 20px}
+.field{display:grid;gap:6px;margin:13px 0}
+.field label{font-size:12px;color:#c5c5c5}
+.field input,.field select,.field textarea{width:100%;border:1px solid #505050;border-radius:11px;padding:12px;background:#1d1d1d;color:var(--text);outline:none}
+.auth-buttons{display:grid;gap:8px;margin-top:18px}
+.auth-message{font-size:12px;min-height:18px;margin-top:12px;color:#c7baff}
+.panel{width:min(920px,100%);margin:0 auto;padding:24px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.panel h2{margin:0}
+.admin-card{background:#292929;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.inline-form{display:grid;grid-template-columns:1.1fr 1fr auto;gap:8px}
+.inline-form input,.inline-form select{min-width:0;border:1px solid #505050;border-radius:10px;background:#1e1e1e;color:var(--text);padding:10px}
+.tester-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #ffffff12}
+.tester-row:last-child{border-bottom:0}
+.tester-info{min-width:0;overflow-wrap:anywhere}
+.tester-actions{display:flex;gap:6px;flex-wrap:wrap}
+.status{font-size:11px;border:1px solid #555;border-radius:99px;padding:3px 8px;color:#d3c8ff}
+.alert{border:1px solid #7a6337;background:#342b1d;color:#f3d9a3;border-radius:11px;padding:11px;font-size:12px;margin:12px 0}
+.overlay{display:none}
+.role-pill{font-size:11px;color:#cfc3ff;border:1px solid #50476a;border-radius:99px;padding:4px 8px}
+.empty{padding:20px;text-align:center;color:var(--muted)}
+@media(max-width:760px){
+.sidebar{position:fixed;z-index:10;inset:0 auto 0 0;transform:translateX(-105%);transition:transform .2s;width:275px;box-shadow:12px 0 40px #0004}
+.sidebar.open{transform:translateX(0)}
+.overlay.show{display:block;position:fixed;inset:0;background:#0008;z-index:9}
+.menu-toggle{display:inline-grid}
+.topbar{padding:0 12px}
+.chat{padding:20px 15px}
+.composer-wrap{padding:0 10px 10px}
+.suggestions{grid-template-columns:1fr}
+.inline-form{grid-template-columns:1fr}
+.panel{padding:16px 12px}
+.tester-row{align-items:flex-start;flex-direction:column}
+.auth-card{padding:22px}
+}
 </style>
 </head>
-<body><div class="wrap">
-<header><div class="brand"><img src="assets/icon-192.png" alt="MOUTHY AI icon"><div><h1>MOUTHY <span class="gradient">AI</span></h1><small>Your AI with an attitude problem.</small></div></div><span class="pill">BETA 0.2</span></header>
-<main id="loginView"><section class="card loginbox login-simple">
-<img src="assets/icon-512.png" alt="MOUTHY AI icon"><h2 style="margin:0">Sign in to MOUTHY AI</h2>
-<p class="muted" style="margin:0">One chat. Ask anything. No mode menu.</p>
-<div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
-<div class="field"><label for="displayName">Display name (optional)</label><input id="displayName" autocomplete="nickname" placeholder="What should MOUTHY call you?"></div>
-<button class="primary" id="signIn">Start chatting</button>
-<div class="small">Prototype notice: this demo login is stored on this device and is not secure account authentication. Real owner-only access requires a protected backend.</div>
-</section></main>
-<main id="appView" class="hidden">
-<aside id="chatSidebar" class="chat-sidebar" aria-label="Main navigation">
-  <div class="sidebar-brand"><img src="assets/icon-192.png" alt=""><span>MOUTHY <b>AI</b></span><button id="sidebarToggle" type="button" class="sidebar-toggle" aria-label="Toggle sidebar">☰</button></div>
-  <button id="newChat" class="sidebar-action new-chat-action" type="button"><span class="action-symbol">＋</span><span>New chat</span></button>
-  <div class="sidebar-section-label">WORKSPACE</div>
-  <div class="sidebar-current"><span class="current-dot"></span><span>Current conversation</span></div>
-  <div class="sidebar-bottom">
-    <button id="customizeButton" class="sidebar-action" type="button"><span class="action-symbol">⚙</span><span>Personalize MOUTHY</span></button>
-    <button id="adminButton" class="sidebar-action hidden" type="button"><span class="action-symbol">♛</span><span>Owner dashboard</span></button>
-    <div class="sidebar-profile"><img id="sidebarAvatar" src="assets/icon-192.png" alt=""><div class="profile-copy"><b id="sidebarName">MOUTHY member</b><small id="sidebarRole">Account</small></div><button id="signOut" type="button" class="signout-button" aria-label="Sign out" title="Sign out">⇥</button></div>
+<body>
+
+<section id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="brand" style="padding:0 0 16px">
+      MOUTHY <span>AI</span>
+      <span style="color:#aaa;font-size:12px;font-weight:500">AFTER DARK</span>
+    </div>
+    <h1 id="authTitle">Your AI. Less polite.</h1>
+    <p id="authSubtitle">A ChatGPT-style chat with a sharper mouth, dark humor, and useful answers.</p>
+    <div class="field">
+      <label for="authEmail">Email address</label>
+      <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com">
+    </div>
+    <div class="field">
+      <label for="authPassword">Password</label>
+      <input id="authPassword" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters">
+    </div>
+    <div id="nameField" class="field hidden">
+      <label for="authName">Display name (optional)</label>
+      <input id="authName" maxlength="60" autocomplete="nickname" placeholder="What should MOUTHY call you?">
+    </div>
+    <div class="auth-buttons">
+      <button id="signInBtn" class="primary">Sign in</button>
+      <button id="signUpBtn">Create account</button>
+      <button id="forgotBtn">Forgot password?</button>
+    </div>
+    <div id="authMessage" class="auth-message" aria-live="polite">Create an account to get started.</div>
+    <div class="small" style="margin-top:14px">After Dark means adult humor and blunt language—not permission to harm, exploit, or create non-consensual sexual images.</div>
   </div>
-</aside>
-<section class="workspace" id="workspace">
-<section class="card chat-shell">
-<div class="chat-top"><div class="chat-heading"><button id="mobileSidebarToggle" class="mobile-sidebar-toggle" type="button" aria-label="Open navigation">☰</button><img id="chatAvatar" src="assets/icon-192.png" alt="MOUTHY AI avatar"><div><b id="chatTitle">MOUTHY AI</b><div class="small" id="accountLabel"></div></div></div><span class="topbar-status">MOUTHY AI <span aria-hidden="true">•</span> Beta</span></div>
-<div id="chatScroll" class="chat-scroll" aria-live="polite"><div class="bubble ai"><div class="speaker">MOUTHY AI</div>Well, look who finally showed up. 😈 Ask me something. Need help, a code fix, a lyric, or a roast? Just say it. No damn menu required.</div></div>
-<div class="composer"><div id="attachmentTray" class="attachment-tray" aria-live="polite"></div><input id="chatFiles" type="file" multiple accept="image/*,.pdf,.doc,.docx,.txt,.md,.csv,.json,.js,.ts,.tsx,.jsx,.html,.css,.py,.java,.c,.cpp,.h,.swift,.rs,.sql,.xml,.yaml,.yml,.log" hidden><div class="composer-row"><button id="attachFiles" class="attach-button" type="button" aria-label="Attach photos or files" title="Attach photos or files">＋</button><textarea id="chatInput" rows="1" placeholder="Message MOUTHY AI…"></textarea><button class="primary" id="sendChat" aria-label="Send message">↑</button></div><div class="hint">MOUTHY AI can make mistakes. The current beta uses demo replies until the AI backend is connected.</div></div>
 </section>
-<section id="welcomePanel" class="hidden" aria-hidden="true" style="display:none!important;margin-top:14px">
-<div class="card">
-  <div style="display:flex;align-items:center;gap:12px">
-    <img src="assets/icon-192.png" alt="MOUTHY AI" style="width:64px;height:64px;object-fit:cover;border-radius:16px">
-    <div><span class="pill" id="welcomeBadge">NEW MEMBER</span><h2 id="welcomeHeading" style="margin:6px 0 0">Alright, let's get acquainted. 😈</h2></div>
+
+<div id="app" class="app hidden">
+  <div id="overlay" class="overlay"></div>
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">MOUTHY <span>AI</span></div>
+    <button id="newChatBtn" class="side-btn">＋ <span>New chat</span></button>
+    <button id="searchChatBtn" class="side-btn">⌕ <span>Search conversations</span></button>
+    <div id="historyList"></div>
+    <div class="side-bottom">
+      <button id="adminNav" class="side-btn hidden">⚙ <span>Owner dashboard</span></button>
+      <button id="settingsNav" class="side-btn">☷ <span>Account & help</span></button>
+      <div class="small" id="sideUser" style="padding:5px 9px;overflow-wrap:anywhere"></div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="top-left">
+        <button id="menuBtn" class="round menu-toggle" aria-label="Open menu">☰</button>
+        <span id="topTitle">New chat</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span id="rolePill" class="role-pill hidden"></span>
+        <button id="accountBtn">Account</button>
+      </div>
+    </header>
+
+    <div id="chatContent" class="content">
+      <div id="chatArea" class="chat">
+        <div id="welcome" class="welcome">
+          <h1 id="welcomeHeading">What can I help you with?</h1>
+          <p id="welcomeCopy">Ask me anything. I’ll give you the answer, not a lecture—with a little attitude where appropriate.</p>
+          <div class="suggestions">
+            <button class="suggestion" data-prompt="Help me debug this code and explain the fix clearly.">⌘ Debug some code<br><span class="small">Find the bug without the bullshit</span></button>
+            <button class="suggestion" data-prompt="Help me write something funny, sharp, and memorable.">✎ Write something<br><span class="small">Make it land, not flop</span></button>
+            <button class="suggestion" data-prompt="Help me brainstorm a creative project with a bold concept.">✧ Brainstorm ideas<br><span class="small">Turn chaos into a plan</span></button>
+            <button class="suggestion" data-prompt="Roast me playfully, then give me something useful to work on.">☠ Roast me<br><span class="small">A little disrespect, a lot of usefulness</span></button>
+          </div>
+        </div>
+        <div id="messages"></div>
+      </div>
+    </div>
+
+    <div class="composer-wrap">
+      <div id="fileTray" class="small" style="padding:0 8px 7px"></div>
+      <div class="composer">
+        <textarea id="promptInput" rows="1" placeholder="Message MOUTHY AI…"></textarea>
+        <div class="composer-actions">
+          <div class="actions-left">
+            <button id="attachBtn" class="round" title="Attach files">＋</button>
+            <input id="fileInput" type="file" multiple hidden accept="image/*,.txt,.md,.pdf,.doc,.docx,.csv,.json,.js,.ts,.jsx,.tsx,.html,.css,.py,.java,.swift,.rs,.sql,.log">
+            <span class="small">After Dark · full attitude</span>
+          </div>
+          <div class="actions-right">
+            <button id="voiceBtn" class="round" title="Read a voice preview">◖))</button>
+            <button id="sendBtn" class="round send" aria-label="Send">↑</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fineprint">MOUTHY AI can make mistakes. Don’t share passwords or sensitive account details.</div>
+  </main>
+</div>
+
+<section id="adminScreen" class="hidden" style="min-height:100dvh;background:var(--bg)">
+  <header class="topbar">
+    <div class="top-left">
+      <button id="backChatBtn">← Back to chat</button>
+      <strong>Owner dashboard</strong>
+    </div>
+    <button id="adminAccountBtn">Account</button>
+  </header>
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>Tester management</h2>
+        <div class="muted">Only the authenticated owner should be able to manage access.</div>
+      </div>
+      <span class="role-pill">OWNER ONLY</span>
+    </div>
+    <div class="alert">This panel requires Supabase Auth and the included SQL policies. Do not use a client-side email check as your security boundary.</div>
+    <div class="admin-card">
+      <h3 style="margin:0 0 6px">Add or approve a tester</h3>
+      <p class="small">Enter the tester’s account email. This approves an existing account or creates an invitation record, depending on your backend setup.</p>
+      <div class="inline-form">
+        <input id="testerEmail" type="email" placeholder="tester@example.com">
+        <input id="testerName" placeholder="Name (optional)">
+        <button id="addTesterBtn" class="primary">Add / approve</button>
+      </div>
+    </div>
+    <div class="admin-card">
+      <h3 style="margin-top:0">Tester roster</h3>
+      <div id="testerRoster"><div class="empty">Sign in as the verified owner and connect the database to load testers.</div></div>
+    </div>
+    <div class="admin-card">
+      <h3 style="margin-top:0">Swap a tester</h3>
+      <p class="small">Revoke the current tester’s pass and approve the replacement. This operation should be logged by the backend.</p>
+      <div class="inline-form">
+        <input id="swapOldEmail" type="email" placeholder="Current tester email">
+        <input id="swapNewEmail" type="email" placeholder="Replacement email">
+        <button id="swapTesterBtn">Swap tester</button>
+      </div>
+    </div>
   </div>
-  <p id="welcomeIntroCopy" class="muted">I'm MOUTHY AI. I can talk shit, help you solve problems, brainstorm ideas, and tell you when something needs work. Before we get into it, introduce yourself. Share only what you're comfortable sharing—no need for sensitive personal details.</p>
-  <div class="field"><label for="introName">What should I call you?</label><input id="introName" maxlength="60" placeholder="Your name or nickname"></div>
-  <div class="field" style="margin-top:10px"><label for="introAbout">What should I know about you? (optional)</label><textarea id="introAbout" rows="3" maxlength="1200" placeholder="Your interests, goals, projects, what you're working on..."></textarea></div>
-  <div class="field" style="margin-top:10px"><label for="introStyle">How should I talk to you?</label><select id="introStyle" style="width:100%;padding:12px;border:1px solid #453552;background:#0d0a15;color:white;border-radius:12px"><option value="mouthy">Go full MOUTHY: vulgar, savage, but helpful</option><option value="sarcastic">Sarcastic and witty</option><option value="friendly">Friendly with light teasing</option><option value="direct">Blunt and straight to the point</option></select></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="primary" id="saveIntro">Let's do this</button><button class="ghost" id="skipIntro">Skip for now</button></div>
-  <div class="small" style="margin-top:10px">This prototype saves your introduction on this device only. Avoid sharing passwords, financial account details, or anything you don't want stored.</div>
-</div></section>
-<section id="customizePanel" class="hidden" style="margin-top:14px">
-<div class="card">
-  <div class="row" style="display:flex;justify-content:space-between;align-items:center;gap:12px">
-    <div><h2 style="margin:0">🎨 Customize your chatbot</h2><div class="small">Make your MOUTHY AI feel like yours. These settings stay on this device in this demo.</div></div>
-    <button id="closeCustomize">Done</button>
+</section>
+
+<section id="accountScreen" class="auth-screen hidden">
+  <div class="auth-card">
+    <div class="panel-head">
+      <h2>Account & help</h2>
+      <button id="closeAccountBtn">Close</button>
+    </div>
+    <p id="accountDetails"></p>
+    <div class="admin-card">
+      <b>What’s live in this build?</b>
+      <p class="small">The chat UI, account flow, conversation storage, file selection, and role-aware screen are included. Real AI answers require an AI endpoint. File selection does not mean file contents have been sent to a model.</p>
+    </div>
+    <button id="signOutBtn" class="danger" style="width:100%">Sign out</button>
   </div>
-  <div class="hero" style="margin-top:14px">
-    <div class="field"><label for="botName">Chatbot name</label><input id="botName" maxlength="32" placeholder="MOUTHY AI"></div>
-    <div class="field"><label for="botStyle">Personality style</label><select id="botStyle" style="width:100%;padding:12px;border:1px solid #453552;background:#0d0a15;color:white;border-radius:12px"><option value="mouthy">Mouthy, vulgar, and helpful</option><option value="sarcastic">Sarcastic and witty</option><option value="friendly">Friendly with light teasing</option><option value="direct">Blunt and straight to the point</option></select></div>
-    <div class="field"><label for="botAvatar">Upload a custom avatar (optional)</label><input id="botAvatar" type="file" accept="image/*"><div class="small">Choose a picture from your device. It previews locally and is not uploaded to a server.</div></div>
-    <div class="field"><label>Avatar preview</label><img id="avatarPreview" src="assets/icon-192.png" alt="Chatbot avatar preview" style="width:112px;height:112px;border-radius:22px;object-fit:cover;border:1px solid #7944b6"><button id="resetAvatar" type="button" class="ghost" style="width:max-content">Use MOUTHY AI icon again</button></div>
-  </div>
-  <div class="field" style="margin-top:12px"><label for="botInstructions">Extra instructions (optional)</label><textarea id="botInstructions" rows="3" maxlength="500" placeholder="Example: Keep answers short, use dark humor, and explain technical steps for beginners."></textarea></div>
-  <div class="field" style="margin-top:12px"><label for="botVoice">Spoken reply voice</label><select id="botVoice" style="width:100%;padding:12px;border:1px solid #453552;background:#0d0a15;color:white;border-radius:12px"><option value="female">Female-sounding</option><option value="male">Male-sounding</option><option value="device">Device default</option></select><button id="previewVoice" type="button" class="ghost" style="width:max-content">🔊 Preview selected voice</button><div class="small">Available voices depend on your browser and device. This preview uses your device’s speech engine.</div></div>
-  <button id="saveCustomize" class="primary" style="margin-top:12px">Save my personal settings</button>
-  <div class="small" style="margin-top:8px">These are personal settings for your account on this browser. They do not change MOUTHY AI for other users. A connected AI backend is needed for personality settings to guide real model responses.</div>
-</div></section>
-<section id="adminPanel" class="hidden" style="margin-top:14px"><div class="admin-panel"><div class="row" style="justify-content:space-between"><div><h2 style="margin:0">👑 Owner Dashboard</h2><div class="small">Creator-only controls for beta-pass approvals and replacement nominations. Beta testers can use the app and change their own personal settings, but cannot manage other users or app-wide controls.</div></div><button id="closeAdmin">Back to chat</button></div></div>
-<div class="stats"><div class="stat"><span class="small">Initial founder slots</span><b>10</b></div><div class="stat"><span class="small">Extra passes</span><b id="extraCount">0</b></div><div class="stat"><span class="small">Transfers recorded</span><b id="transferCount">0</b></div></div>
-<div class="card" style="margin-bottom:12px"><h3>Approve another Founder's Pass</h3><div class="field"><label>Email</label><input id="newFounderEmail" type="email" placeholder="tester@example.com"></div><div class="field" style="margin-top:8px"><label>Name (optional)</label><input id="newFounderName" placeholder="Tester name"></div><button class="primary" id="approveFounder" style="margin-top:10px">Approve pass</button></div>
-<div class="card" style="margin-bottom:12px"><h3>Record a replacement nomination</h3><div class="field"><label>Original member email</label><input id="oldMemberEmail" type="email" placeholder="original@example.com"></div><div class="field" style="margin-top:8px"><label>Replacement email</label><input id="replacementEmail" type="email" placeholder="replacement@example.com"></div><button id="recordTransfer" style="margin-top:10px">Record transfer</button></div>
-<div class="card"><h3>Founder's Pass register</h3><div id="founderList" class="list"></div></div>
-</section></section></main>
-<div class="footer">MOUTHY AI Beta 0.4 · Chat-first local prototype. Owner roles, tester approvals, and settings need server-side authentication before they are secure across users.</div></div><div id="toast"></div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (()=>{'use strict';
-const OWNER='dereck1988@icloud.com',KEY='mouthyUnifiedBetaV2';let current=null;
-// UI role separation only: a public static page cannot securely authenticate an owner by email alone.
-const personalCustomKey=email=>'mouthyBotCustomV2:'+String(email||'guest').toLowerCase();
-const roleLabel=role=>role==='owner'?'Creator':role==='beta_tester'?'Founder’s Pass · Lifetime free access':'Member';
-const isOwner=()=>current?.role==='owner';
+
+// Configure these with your Supabase project.
+// Never put a service-role key in this public file.
+const SUPABASE_URL='PASTE_YOUR_SUPABASE_PROJECT_URL_HERE';
+const SUPABASE_ANON_KEY='PASTE_YOUR_SUPABASE_ANON_PUBLIC_KEY_HERE';
+
+// Optional HTTPS backend endpoint that accepts
+// {messages:[{role,content}], role, mode:'after-dark'}
+// and returns {reply:"..."}.
+const AI_ENDPOINT='';
+
+// This email is informational only.
+// Verified role must come from the protected profiles table.
+const OWNER_EMAIL='dereck1988@icloud.com';
+
+const READY=SUPABASE_URL.startsWith('https://')
+  &&!SUPABASE_URL.includes('PASTE_')
+  &&SUPABASE_ANON_KEY
+  &&!SUPABASE_ANON_KEY.includes('PASTE_');
+
+const sb=window.supabase&&READY
+  ?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY)
+  :null;
+
 const $=id=>document.getElementById(id);
-const read=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{messages:[],founders:[],transfers:[],extra:[]}}catch{return{messages:[],founders:[],transfers:[],extra:[]}}};
-const write=d=>localStorage.setItem(KEY,JSON.stringify(d));let db=read();
-if(!db.founders.length){db.founders=Array.from({length:10},(_,i)=>({email:`founder${String(i+1).padStart(2,'0')}@example.com`,name:`Founding Tester ${i+1}`,status:'Reserved'}));write(db)}
-function toast(s){$('toast').textContent=s;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2500)}
-function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function addBubble(role,text,save=true,attachments=[]){
- const b=document.createElement('div');b.className='bubble '+role;
- const speaker=document.createElement('div');speaker.className='speaker';speaker.textContent=role==='user'?'YOU':'MOUTHY AI';
- const body=document.createElement('div');body.textContent=text||(attachments.length?'Attached '+attachments.length+' file(s).':'');b.append(speaker,body);
- if(attachments.length){const wrap=document.createElement('div');wrap.className='message-attachments';attachments.forEach(item=>{const card=document.createElement('div');card.className='message-attachment';if(item.file&&item.file.type&&item.file.type.startsWith('image/')){const img=document.createElement('img');img.src=URL.createObjectURL(item.file);img.alt=item.file.name;card.appendChild(img)}else if(item.previewUrl){const img=document.createElement('img');img.src=item.previewUrl;img.alt=item.name||'Attached image';card.appendChild(img)}const label=document.createElement('div');label.textContent=item.file?item.file.name:(item.name||'Attached file');card.appendChild(label);if(item.file){const meta=document.createElement('div');meta.className='small';meta.textContent=item.file.type||'File';card.appendChild(meta)}wrap.appendChild(card)});b.appendChild(wrap)}
- $('chatScroll').appendChild(b);$('chatScroll').scrollTop=$('chatScroll').scrollHeight;
- if(save){db=read();db.messages.push({role,text,attachments:attachments.map(item=>({name:item.file?item.file.name:(item.name||'Attached file'),type:item.file?item.file.type:(item.type||''),size:item.file?item.file.size:(item.size||0)})),at:new Date().toISOString(),email:current?.email||''});write(db)}
-}
-function renderHistory(){ $('chatScroll').innerHTML='';db=read();const msgs=db.messages.filter(m=>m.email===current.email).slice(-100);if(!msgs.length)return;msgs.forEach(m=>addBubble(m.role,m.text,false,(m.attachments||[]).map(a=>({name:a.name,type:a.type,size:a.size}))));}
-function login(){
- const email=$('email').value.trim().toLowerCase();
- if(!email||!email.includes('@'))return toast('Enter a valid email address.');
- const typedName=$('displayName').value.trim();let rememberedName='';try{rememberedName=localStorage.getItem('mouthyDisplayName:'+email)||''}catch{}const name=typedName||rememberedName||email.split('@')[0];
- const role=email===OWNER?'owner':(isBetaTester(email)?'beta_tester':'user');
- current={email,name,role,admin:role==='owner'};
- try{const profiles=JSON.parse(localStorage.getItem('mouthyMemberProfilesV1')||'{}');if(profiles[email]?.name)current.name=profiles[email].name;else if(name)localStorage.setItem('mouthyDisplayName:'+email,name)}catch{}
- $('loginView').classList.add('hidden');$('appView').classList.remove('hidden');document.body.classList.add('chat-active');
- $('accountLabel').textContent=current.name+' · '+roleLabel(role);$('sidebarName').textContent=current.name;$('sidebarRole').textContent=roleLabel(role);
- loadCustom();
- // The Admin button and dashboard are creator-only in the interface.
- $('adminButton').classList.toggle('hidden',!isOwner());
- $('adminButton').setAttribute('aria-hidden',String(!isOwner()));
- $('adminPanel').classList.add('hidden');$('customizePanel').classList.add('hidden');$('welcomePanel').classList.add('hidden');
- renderHistory();
- const seenKey='mouthyWelcomeSeenV5:'+email;
- let seen=false;try{seen=localStorage.getItem(seenKey)==='1'}catch{}
- if(!seen){addBubble('ai',roleWelcomeMessage(),true);try{localStorage.setItem(seenKey,'1');localStorage.setItem('mouthyWelcomeSeenV4:'+email,'1')}catch{}}
- else if(!$('chatScroll').children.length){addBubble('ai','What can I help you with today? Ask a question, share a problem, paste code, work on writing, or ask for a roast. 😈',false)}
- $('chatInput').focus();
- if(isOwner())toast('Creator view enabled in this local demo.');
-}
-function roleWelcomeMessage(){
- if(current?.role==='owner')return "OH, SHIT—the creator is here! Welcome home, boss. 😈🔥\n\nYou built MOUTHY AI, so this is your space to test ideas, steer the product, and manage the beta. Your owner controls are available from the Admin button. I’ll bring the attitude; you bring the next big idea. What are we building or fixing first?";
- if(current?.role==='beta_tester')return "WELCOME TO THE MOUTHY AI BETA, YOU BEAUTIFUL TESTING GREMLIN! 😈🔥\n\nYour Founder’s Pass is intended to include lifetime free access to MOUTHY AI features as they roll out. You can use the chatbot and customize your own experience, but you do not have owner/admin controls. Try things, report what breaks, and tell us what could be better. What are we trying first?";
- return "Well, look who found MOUTHY AI. 😈\n\nI’m here to help with questions, code, writing, ideas, troubleshooting, and the occasional well-earned roast. No mode menu, no ceremony—just tell me what you need. What can I help you with today?";
-}
-function logout(){$('appView').classList.add('hidden');document.body.classList.remove('chat-active','sidebar-open');$('loginView').classList.remove('hidden');$('email').value='';$('displayName').value='';$('adminButton').classList.add('hidden');$('adminPanel').classList.add('hidden');$('customizePanel').classList.add('hidden');$('welcomePanel').classList.add('hidden');current=null}
-function renderAdmin(){if(!isOwner())return;db=read();$('extraCount').textContent=db.extra.length;$('transferCount').textContent=db.transfers.length;const all=[...db.founders,...db.extra];$('founderList').innerHTML=all.map(f=>`<div class="member"><div><b>${safe(f.name||f.email)}</b><div class="small">${safe(f.email)}</div></div><span class="tag">${safe(f.status||'Approved')}</span></div>`).join('')+(db.transfers.length?'<h3>Transfer history</h3>'+db.transfers.map(t=>`<div class="member"><div><b>${safe(t.old)}</b><div class="small">→ ${safe(t.replacement)}</div></div><span class="tag">Recorded</span></div>`).join(''):'')}
-function localReply(q){const s=q.toLowerCase();
-if(/^(hi|hey|hello|yo)\b/.test(s))return "Well, well, well. Someone has arrived with functioning thumbs. 😈 What's going on? Give me the problem and I'll help you sort the damn thing out.";
-if(/roast|insult|make fun|talk shit/.test(s))return "You want a roast? You bring the energy of a phone at 1% battery acting like it's got a five-year plan. 😂 Now tell me what we're roasting—or give me an actual problem and we'll fix that too.";
-if(/error|bug|code|javascript|python|html|css|function|undefined|referenceerror/.test(s))return "Alright, code gremlin, let's debug this bastard. Paste the relevant code and the exact error message, including the line number. I'll help narrow it down. This offline beta isn't running a real code-analysis model yet, so I'm not going to pretend I inspected code you haven't shared.";
-if(/song|lyric|chorus|verse|write.*(story|poem|email|post)|lyrics/.test(s))return "Creative mode? No button required. 😏 Tell me the genre, mood, subject, and any lines that must stay exactly as written. I'll help shape it. This prototype can only give basic demo replies until the real AI is connected.";
-if(/wife|husband|friend|girlfriend|boyfriend|argument|relationship/.test(s))return "Alright, relationship chaos department is open. 😂 Tell me what happened and what outcome you actually want. I'll be blunt without automatically declaring you the saint and everyone else a damn villain.";
-if(/how do i|help me|what is|explain|why does|can you/.test(s))return "I can help with that, but this first beta is running without a live AI model. Give me the specific details and I'll keep the conversation going; when we connect the backend, this becomes the real answer engine instead of this glorified demo with a mouth.";
-return "Alright, you magnificent chaos goblin. 😈 I got your message: “"+q+"”\n\nHere's the honest deal: this build is an interface prototype, not a connected AI brain, so I can't reliably solve that yet. The next step is connecting a secure AI backend. No fake claims, no pretending a canned reply is genius-level analysis.";
-}
-let selectedChatFiles=[];
-function formatBytes(bytes){if(!bytes)return 'File';if(bytes<1024)return bytes+' B';if(bytes<1024*1024)return (bytes/1024).toFixed(1)+' KB';return (bytes/(1024*1024)).toFixed(1)+' MB'}
-function renderAttachmentTray(){const tray=$('attachmentTray');tray.innerHTML='';selectedChatFiles.forEach((file,index)=>{const chip=document.createElement('div');chip.className='attachment-chip';if(file.type.startsWith('image/')){const img=document.createElement('img');img.src=URL.createObjectURL(file);img.alt=file.name;chip.appendChild(img)}else{const glyph=document.createElement('span');glyph.textContent='📄';glyph.style.fontSize='22px';chip.appendChild(glyph)}const info=document.createElement('div');info.style.minWidth='0';const name=document.createElement('div');name.className='attachment-name';name.textContent=file.name;const size=document.createElement('div');size.className='small';size.textContent=formatBytes(file.size);info.append(name,size);chip.appendChild(info);const remove=document.createElement('button');remove.type='button';remove.className='attachment-remove';remove.textContent='✕';remove.setAttribute('aria-label','Remove '+file.name);remove.addEventListener('click',()=>{selectedChatFiles.splice(index,1);renderAttachmentTray()});chip.appendChild(remove);tray.appendChild(chip)})}
-$('attachFiles').addEventListener('click',()=>$('chatFiles').click());
-$('chatFiles').addEventListener('change',event=>{const incoming=Array.from(event.target.files||[]);const allowed=incoming.filter(file=>{if(file.size>15*1024*1024){toast(file.name+' is over the 15 MB limit.');return false}return true});const remaining=Math.max(0,10-selectedChatFiles.length);if(allowed.length>remaining)toast('You can attach up to 10 files per message.');selectedChatFiles=[...selectedChatFiles,...allowed.slice(0,remaining)];renderAttachmentTray();event.target.value=''});
-function send(){const question=$('chatInput').value.trim();if(!question&&!selectedChatFiles.length)return;const files=selectedChatFiles.slice();const note=files.length?'[Attachments: '+files.map(file=>file.name).join(', ')+']':'';const message=[question,note].filter(Boolean).join('\n\n');addBubble('user',message,true,files.map(file=>({file})));$('chatInput').value='';selectedChatFiles=[];renderAttachmentTray();if(question){addBubble('ai',localReply(question))}else{addBubble('ai',"I can see that you attached file(s), but this beta doesn't have its AI file-analysis connection yet. Once the backend is connected, I'll be able to inspect supported images and documents instead of just showing their names.")}}
+let sessionUser=null,profile=null,role='user',authMode='signin',activeFiles=[],busy=false,chatId=null;
 
-$('sidebarToggle').addEventListener('click',()=>document.body.classList.toggle('sidebar-collapsed'));
-$('mobileSidebarToggle').addEventListener('click',()=>document.body.classList.toggle('sidebar-open'));
-document.addEventListener('click',event=>{if(document.body.classList.contains('sidebar-open')&&!event.target.closest('#chatSidebar')&&!event.target.closest('#mobileSidebarToggle'))document.body.classList.remove('sidebar-open')});
-document.addEventListener('keydown',event=>{if(event.key==='Escape')document.body.classList.remove('sidebar-open')});
+const chatsKey=()=>`mouthyChatsV1:${sessionUser?.id||'guest'}`;
+const profileKey=()=>`mouthyProfileV1:${sessionUser?.id||'guest'}`;
 
-$('signIn').addEventListener('click',login);$('email').addEventListener('keydown',e=>{if(e.key==='Enter')login()});$('signOut').addEventListener('click',logout);
-$('sendChat').addEventListener('click',send);$('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
-$('newChat').addEventListener('click',()=>{if(!current)return;db=read();db.messages=db.messages.filter(m=>m.email!==current.email);write(db);renderHistory();addBubble('ai','New chat started. What can I help you with? 😈',false);$('chatInput').focus();toast('Started a fresh chat.')});
-$('adminButton').addEventListener('click',()=>{if(!isOwner())return toast('Admin controls are reserved for the creator. Your role does not have permission.');$('adminPanel').classList.remove('hidden');renderAdmin();$('adminPanel').scrollIntoView({behavior:'smooth'})});
-$('closeAdmin').addEventListener('click',()=>{$('adminPanel').classList.add('hidden');$('workspace').scrollTo({top:0,behavior:'smooth'})});
-$('approveFounder').addEventListener('click',()=>{if(!isOwner())return toast('Admin controls are reserved for the creator. Your role does not have permission.');const email=$('newFounderEmail').value.trim().toLowerCase();if(!email.includes('@'))return toast('Enter a valid email.');db=read();if([...db.founders,...db.extra].some(f=>f.email===email))return toast('That email is already listed.');db.extra.push({email,name:$('newFounderName').value.trim()||email.split('@')[0],status:'Approved — local demo'});write(db);$('newFounderEmail').value='';$('newFounderName').value='';renderAdmin();toast('Pass recorded locally only.')});
-$('recordTransfer').addEventListener('click',()=>{if(!isOwner())return toast('Admin controls are reserved for the creator. Your role does not have permission.');const old=$('oldMemberEmail').value.trim().toLowerCase(),replacement=$('replacementEmail').value.trim().toLowerCase();if(!old.includes('@')||!replacement.includes('@')||old===replacement)return toast('Enter two different valid emails.');db=read();if(!isBetaTester(old))return toast('The original email is not on the approved Founder’s Pass register.');if(isBetaTester(replacement)||replacement===OWNER)return toast('That replacement email already has a pass or is the creator account.');if(db.transfers.some(t=>t.old===old))return toast('A transfer is already recorded for that original email.');db.transfers.push({old,replacement,date:new Date().toISOString()});write(db);renderAdmin();toast('Transfer recorded locally only.')});
+function msg(el,text){$(el).textContent=text}
+function authNotice(t){msg('authMessage',t)}
+function isOwner(){return role==='owner'}
+function isTester(){return role==='beta_tester'}
 
-function getCustom(){
- if(!current)return{};
- try{const saved=localStorage.getItem(personalCustomKey(current.email));if(saved)return JSON.parse(saved)}catch{}
- // Migrate the previous single-device setting to the first profile that opens it.
- try{const legacy=localStorage.getItem('mouthyBotCustomV1');if(legacy){const c=JSON.parse(legacy);localStorage.setItem(personalCustomKey(current.email),JSON.stringify(c));localStorage.removeItem('mouthyBotCustomV1');return c}}catch{}
- return{};
+function setAuthMode(mode){
+  authMode=mode;
+  $('nameField').classList.toggle('hidden',mode!=='signup');
+  $('signInBtn').classList.toggle('hidden',mode!=='signin');
+  $('signUpBtn').classList.toggle('hidden',mode!=='signup');
+  $('forgotBtn').classList.toggle('hidden',mode!=='signin');
+  $('authTitle').textContent=mode==='signup'?'Create your MOUTHY account':mode==='reset'?'Reset your password':'Your AI. Less polite.';
+  $('authSubtitle').textContent=mode==='signup'?'Create an account and step into the After Dark experience.':mode==='reset'?'We’ll send a password reset link if the account exists.':'A ChatGPT-style chat with a sharper mouth, dark humor, and useful answers.';
+  authNotice(mode==='signup'?'Use an email you can access and a password with at least 8 characters.':'Sign in or create an account to get started.');
 }
-function loadCustom(){
- const c=getCustom();
- $('botName').value=c.name||'MOUTHY AI';$('botStyle').value=c.style||'mouthy';$('botInstructions').value=c.instructions||'';$('botVoice').value=c.voice||'female';
- if(c.avatar){$('avatarPreview').src=c.avatar;$('chatAvatar').src=c.avatar;}else{useAppIcon($('avatarPreview'));useAppIcon($('chatAvatar'));}
- $('chatTitle').textContent=c.name||'MOUTHY AI';
-}
-$('customizeButton').addEventListener('click',()=>{if(!current)return;loadCustom();$('customizePanel').classList.remove('hidden');$('adminPanel').classList.add('hidden');$('customizePanel').scrollIntoView({behavior:'smooth'})});
-$('closeCustomize').addEventListener('click',()=>{$('customizePanel').classList.add('hidden');$('workspace').scrollTo({top:0,behavior:'smooth'})});
-$('botAvatar').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return toast('Choose an image file.');if(f.size>5*1024*1024)return toast('Choose an image smaller than 5 MB for this demo.');const r=new FileReader();r.onload=()=>{$('avatarPreview').src=String(r.result)};r.readAsDataURL(f)});
-$('resetAvatar').addEventListener('click',()=>{useAppIcon($('avatarPreview'));$('botAvatar').value=''});
-$('saveCustomize').addEventListener('click',()=>{
- if(!current)return toast('Sign in first.');
- const c={name:$('botName').value.trim()||'MOUTHY AI',style:$('botStyle').value,instructions:$('botInstructions').value.trim(),voice:$('botVoice').value,avatar:$('avatarPreview').src.startsWith('data:')?$('avatarPreview').src:''};
- try{localStorage.setItem(personalCustomKey(current.email),JSON.stringify(c));$('chatTitle').textContent=c.name;if(c.avatar)$('chatAvatar').src=c.avatar;else useAppIcon($('chatAvatar'));toast('Your personal settings are saved on this browser. Other users are not changed.')}catch{toast('Could not save avatar. Try a smaller image.')}});
-function previewSelectedVoice(){
- if(!('speechSynthesis'in window)||!('SpeechSynthesisUtterance'in window))return toast('Voice preview is not supported by this browser.');
- const c=getCustom(),choice=$('botVoice').value;const msg=new SpeechSynthesisUtterance('Hey, troublemaker. This is MOUTHY AI, testing your selected voice. Now what the hell are we doing?');
- const voices=window.speechSynthesis.getVoices();
- if(choice!=='device'&&voices.length){const female=/(female|woman|samantha|victoria|karen|zira|jenny|aria|sara|ava|allison|moira|tessa|susan|hazel|siri female)/i;const male=/(male|man|daniel|david|alex|fred|guy|mark|james|tom|oliver|lee|siri male)/i;const pattern=choice==='female'?female:male;const voice=voices.find(v=>pattern.test(v.name+' '+v.voiceURI))||voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('en'))||voices[0];if(voice)msg.voice=voice;}
- msg.pitch=choice==='female'?1.12:choice==='male'?0.88:1;msg.rate=1;window.speechSynthesis.cancel();window.speechSynthesis.speak(msg);
-}
-$('previewVoice').addEventListener('click',previewSelectedVoice);
 
+function showOnly(id){
+  ['authScreen','app','adminScreen','accountScreen'].forEach(x=>$(x).classList.toggle('hidden',x!==id));
+}
 
-function prepareWelcome(){
-  const owner=!!(current&&current.admin);
-  const beta=!owner&&isBetaTester(current?.email||'');
-  if(owner){
-    $('welcomeBadge').textContent='OWNER WELCOME';
-    $('welcomeHeading').textContent='OH, SHIT—the creator is here! Welcome home, boss. 😈🔥';
-    $('welcomeIntroCopy').textContent="THE BOSS HAS ENTERED THE BUILDING! Everybody act like this smart-mouthed circus is under control. You built MOUTHY AI, so this is your space to test ideas, break things, make decisions, and steer the chaos. Tell me what to call you and what you're working on—or skip the formalities and get straight to building. Keep passwords and private account details out of the chat.";
-  }else if(beta){
-    $('welcomeBadge').textContent='BETA TESTER WELCOME';
-    $('welcomeHeading').textContent='You’re in the MOUTHY AI beta. Let’s get acquainted. 😈';
-    $('welcomeIntroCopy').textContent="WELCOME TO THE MOUTHY AI BETA, YOU BEAUTIFUL TESTING GREMLIN! 🔥 Your Founder’s Pass is intended to include lifetime free access to MOUTHY AI features as they roll out. You can customize your own experience, but creator controls stay with the owner. Break shit, try weird ideas, ask real questions, and tell us when something sucks. First, tell me what to call you, what you're into, and what kind of chaos you bring to the table. I'll bring the attitude; you bring the personality. Share only what you're comfortable with—keep passwords and private account details out of it.";
-  }else{
-    $('welcomeBadge').textContent='NEW MEMBER WELCOME';
-    $('welcomeHeading').textContent='Well, look who found MOUTHY AI. Let’s get acquainted. 😈';
-    $('welcomeIntroCopy').textContent="WELCOME, YOU MAGNIFICENT INTERNET WILDCARD. I'm MOUTHY AI: sarcastic as hell, blunt when you need it, and here to help you solve problems, work on code, brainstorm ideas, and sharpen your writing. Tell me what to call you and what you're into—or skip the introductions and get straight to the good stuff. Share only what you're comfortable sharing; keep passwords and private account details out of it.";
+function roleName(){return isOwner()?'Creator':isTester()?'Beta tester':'Member'}
+
+function welcomeForRole(){
+  if(isOwner())return {
+    heading:'Well, shit. The boss is here. 😈',
+    copy:'Welcome back, creator. Your dashboard is yours alone. What are we building, fixing, or unleashing today?'
+  };
+  if(isTester())return {
+    heading:'Welcome to the beta, you glorious chaos gremlin. 😈',
+    copy:'You have your Founder’s Pass access. Try the tools, push the experience, and report anything that breaks. Admin controls are not part of tester access.'
+  };
+  return {
+    heading:'What can I help you with?',
+    copy:'Ask me anything. You’ll get useful answers, sharp humor, and the occasional lovingly delivered verbal slap.'
+  };
+}
+
+async function loadProfile(u){
+  role='user';
+  profile={display_name:u.user_metadata?.display_name||u.email?.split('@')[0]||'Troublemaker'};
+  if(!sb)return;
+  try{
+    const {data,error}=await sb.from('profiles').select('role,display_name').eq('id',u.id).maybeSingle();
+    if(error)console.warn('Profile lookup:',error.message);
+    if(data){
+      role=['owner','beta_tester','user'].includes(data.role)?data.role:'user';
+      profile=data;
+    }
+  }catch(e){console.warn(e)}
+}
+
+async function enterApp(u){
+  sessionUser=u;
+  await loadProfile(u);
+  showOnly('app');
+  $('sideUser').textContent=(profile.display_name||u.email)+' · '+roleName();
+  $('rolePill').textContent=roleName();
+  $('rolePill').classList.remove('hidden');
+  $('adminNav').classList.toggle('hidden',!isOwner());
+  const w=welcomeForRole();
+  $('welcomeHeading').textContent=w.heading;
+  $('welcomeCopy').textContent=w.copy;
+  loadChats();
+  $('promptInput').focus();
+}
+
+function getChats(){
+  try{return JSON.parse(localStorage.getItem(chatsKey())||'[]')}
+  catch{return []}
+}
+function saveChats(a){localStorage.setItem(chatsKey(),JSON.stringify(a))}
+
+function loadChats(){
+  const list=getChats();
+  $('historyList').innerHTML='';
+  list.slice().reverse().slice(0,30).forEach(c=>{
+    const b=document.createElement('button');
+    b.className='side-btn';
+    b.textContent='▤ '+(c.title||'New chat');
+    b.onclick=()=>openChat(c.id);
+    $('historyList').append(b);
+  });
+  const latest=list[list.length-1];
+  if(latest)openChat(latest.id);
+  else newChat(false);
+}
+
+function newChat(save=true){
+  chatId='c_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+  $('messages').innerHTML='';
+  $('welcome').classList.remove('hidden');
+  $('topTitle').textContent='New chat';
+  activeFiles=[];
+  renderFiles();
+  if(save){
+    const a=getChats();
+    a.push({id:chatId,title:'New chat',messages:[]});
+    saveChats(a);
+    renderHistory();
   }
 }
-function isBetaTester(email){try{const d=JSON.parse(localStorage.getItem('mouthyUnifiedBetaV2')||'{}');const e=String(email||'').toLowerCase();return (d.founders||[]).some(x=>String(x.email||'').toLowerCase()===e&&!/reserved/i.test(x.status||''))||(d.extra||[]).some(x=>String(x.email||'').toLowerCase()===e&&/approved/i.test(x.status||''))}catch{return false}}
-function finishWelcome(skip){if(!current)return;const email=current.email;const name=$('introName').value.trim()||current.name;const about=$('introAbout').value.trim();const style=$('introStyle').value;try{const profiles=JSON.parse(localStorage.getItem('mouthyMemberProfilesV1')||'{}');profiles[email]={name,about,style,completed:!skip,updatedAt:new Date().toISOString()};localStorage.setItem('mouthyMemberProfilesV1',JSON.stringify(profiles));localStorage.setItem('mouthyWelcomeSeenV4:'+email,'1');localStorage.setItem('mouthyWelcomeSeen:'+email,'1')}catch{};current.name=name;$('accountLabel').textContent=current.name+' · '+roleLabel(current.role);$('sidebarName').textContent=current.name;$('sidebarRole').textContent=roleLabel(current.role);$('welcomePanel').classList.add('hidden');const creator=!!current.admin;const beta=!creator&&isBetaTester(email);const intro=creator?(skip?`Alright, boss, skipping your own damn introduction? Typical creator behavior. 😂 You're still the one steering this chaos machine. What are we fixing or building next?`:`Well, look at you, ${name}—the creator, the boss, and the person legally responsible for this smart-mouthed circus. 😈🔥 ${about?'I’ll keep your intro in this browser as context: '+about+'. ':''}You set the direction; I'll bring the vulgar commentary, test ideas with you, and help turn this bastard into a real product. Now, what are we building next?`):(skip?`Alright, ${name}, skipping the introduction. Mysterious little bastard, huh? 😈 No interrogation from me. We can get acquainted as we go. What the hell do you need?`:`Well, look at us getting acquainted, ${name}. 😈 ${beta?'You’re officially in the beta circus—thanks for helping us kick the tires. If something breaks, tell me what exploded and we’ll sort it out. ':''}${about?'I’ll use what you shared as context in this browser: '+about+'. ':''}${style==='mouthy'?'Full MOUTHY mode it is: filthy jokes, savage-but-playful roasts, and actual help instead of empty noise.':style==='sarcastic'?'Sarcasm loaded. I’ll keep the wit sharp and the answers useful.':style==='friendly'?'I’ll keep the teasing playful and the help real.':'Straight answers, minimal bullshit. Got it.'} Now, what the hell are we tackling first?`);addBubble('ai',intro)}
-$('saveIntro').addEventListener('click',()=>finishWelcome(false));
-$('skipIntro').addEventListener('click',()=>finishWelcome(true));
 
-// If the repository's image files are missing or mis-cased, show a built-in MOUTHY mark instead of broken-image boxes.
-const MOUTHY_ICON_FALLBACK='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff27c8"/><stop offset="1" stop-color="#5845ff"/></linearGradient></defs><rect width="256" height="256" rx="54" fill="#100b1c"/><rect x="12" y="12" width="232" height="232" rx="46" fill="url(#g)"/><path d="M52 74 Q52 52 76 52 H180 Q204 52 204 76 V148 Q204 172 180 172 H124 L82 204 V172 H76 Q52 172 52 148Z" fill="#fff"/><path d="M84 111 Q128 143 172 111" fill="none" stroke="#7c2bc0" stroke-width="12" stroke-linecap="round"/><circle cx="91" cy="91" r="8" fill="#7c2bc0"/><circle cx="165" cy="91" r="8" fill="#7c2bc0"/></svg>');
-function useAppIcon(img){if(!img)return;img.onerror=()=>{img.onerror=null;img.src=MOUTHY_ICON_FALLBACK;};img.src='assets/icon-192.png';}
-document.querySelectorAll('img[src^="assets/icon-"]').forEach(img=>img.addEventListener('error',()=>{img.src=MOUTHY_ICON_FALLBACK},{once:true}));
-document.querySelectorAll('img[src="assets/favicon.png"]').forEach(img=>img.addEventListener('error',()=>{img.src=MOUTHY_ICON_FALLBACK},{once:true}));
-const favicon=document.querySelector('link[rel="icon"]');if(favicon)favicon.addEventListener('error',()=>{favicon.href=MOUTHY_ICON_FALLBACK},{once:true});
+function renderHistory(){
+  const list=getChats();
+  $('historyList').innerHTML='';
+  list.slice().reverse().slice(0,30).forEach(c=>{
+    const b=document.createElement('button');
+    b.className='side-btn';
+    b.textContent='▤ '+(c.title||'New chat');
+    b.onclick=()=>openChat(c.id);
+    $('historyList').append(b);
+  });
+}
 
+function openChat(id){
+  const c=getChats().find(x=>x.id===id);
+  if(!c)return;
+  chatId=id;
+  $('messages').innerHTML='';
+  $('welcome').classList.toggle('hidden',c.messages.length>0);
+  $('topTitle').textContent=c.title||'New chat';
+  c.messages.forEach(m=>drawMessage(m.role,m.content,false));
+  closeSidebar();
+}
+
+function persistMessage(who,text){
+  const a=getChats();
+  let c=a.find(x=>x.id===chatId);
+  if(!c){
+    c={id:chatId,title:'New chat',messages:[]};
+    a.push(c);
+  }
+  c.messages.push({role:who,content:text});
+  if(c.title==='New chat'&&who==='user')c.title=text.slice(0,36)+(text.length>36?'…':'');
+  saveChats(a);
+  renderHistory();
+  $('topTitle').textContent=c.title;
+}
+
+function drawMessage(who,text,save=true){
+  $('welcome').classList.add('hidden');
+  const m=document.createElement('div');
+  m.className='message '+(who==='user'?'user':'assistant');
+  const av=document.createElement('div');
+  av.className='avatar';
+  av.textContent=who==='user'?(profile?.display_name||'Y').slice(0,1).toUpperCase():'M';
+  const body=document.createElement('div');
+  body.className='message-body';
+  text.split('\n').forEach(line=>{
+    const p=document.createElement('p');
+    p.textContent=line||' ';
+    body.append(p);
+  });
+  m.append(av,body);
+  if(who!=='user'){
+    const tools=document.createElement('div');
+    tools.className='message-tools';
+    const copy=document.createElement('button');
+    copy.textContent='Copy';
+    copy.onclick=()=>navigator.clipboard?.writeText(text).then(()=>toast('Copied.')).catch(()=>{});
+    const speak=document.createElement('button');
+    speak.textContent='Read aloud';
+    speak.onclick=()=>speakText(text);
+    tools.append(copy,speak);
+    body.append(tools);
+  }
+  $('messages').append(m);
+  $('chatArea').scrollTop=$('chatArea').scrollHeight;
+  if(save)persistMessage(who,text);
+}
+
+function toast(t){
+  const old=$('toast');
+  if(old)old.remove();
+  const el=document.createElement('div');
+  el.id='toast';
+  el.textContent=t;
+  el.style.cssText='position:fixed;bottom:85px;left:50%;transform:translateX(-50%);z-index:50;background:#333;padding:10px 14px;border:1px solid #666;border-radius:12px;box-shadow:0 5px 20px #0005';
+  document.body.append(el);
+  setTimeout(()=>el.remove(),2400);
+}
+
+function renderFiles(){
+  $('fileTray').textContent=activeFiles.length
+    ?activeFiles.map(f=>`${f.name} (${Math.round(f.size/1024)} KB)`).join(' · ')+' — file names only until backend upload is configured.'
+    :'';
+}
+
+$('attachBtn').onclick=()=>$('fileInput').click();
+$('fileInput').onchange=e=>{
+  for(const f of Array.from(e.target.files||[])){
+    if(f.size>15*1024*1024){toast(f.name+' exceeds 15 MB.');continue}
+    if(activeFiles.length>=10){toast('Maximum 10 files per message.');break}
+    activeFiles.push(f);
+  }
+  renderFiles();
+  e.target.value='';
+};
+
+function demoReply(text){
+  const s=text.toLowerCase();
+  if(/\b(hi|hey|hello|yo)\b/.test(s))return 'Well, well, well. Look who wandered in with functioning thumbs. 😈 What are we tackling?';
+  if(/roast|insult|talk shit/.test(s))return 'You want a roast? You have the strategic planning skills of a raccoon trapped in a vending machine. 😂 But I’m still rooting for you, you magnificent disaster. What’s next?';
+  if(/code|error|bug|javascript|python|html|css/.test(s))return 'Alright, code gremlin. Paste the relevant code and the exact error, and I’ll help you work through it. This build needs the AI endpoint connected before I can honestly claim a real model analyzed your code.';
+  if(/song|lyrics|chorus|verse/.test(s))return 'Hell yes, let’s make something worth replaying. Give me the genre, mood, topic, and any lines that must stay exactly as written. I can help shape verses, hooks, rhyme, and flow.';
+  return `I got you. 😈
+
+This is the MOUTHY AI interface, but the real AI brain isn't connected yet. Add your secure AI endpoint in the code’s AI_ENDPOINT setting to get live model replies. I won’t bullshit you by pretending this demo response came from a model.`;
+}
+
+async function getReply(text){
+  if(AI_ENDPOINT){
+    try{
+      const history=getChats().find(c=>c.id===chatId)?.messages||[];
+      const r=await fetch(AI_ENDPOINT,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'Authorization':`Bearer ${sessionUser?.access_token||''}`
+        },
+        body:JSON.stringify({
+          messages:[...history,{role:'user',content:text}],
+          role,
+          mode:'after-dark',
+          personality:'MOUTHY AI: sarcastic, vulgar when appropriate, darkly funny, genuinely helpful; roast first lightly when context supports it; never let humor replace the useful answer.'
+        })
+      });
+      if(!r.ok)throw Error('AI endpoint returned '+r.status);
+      const d=await r.json();
+      if(d.reply)return d.reply;
+      if(d.message)return d.message;
+      throw Error('No reply field in backend response');
+    }catch(e){
+      console.error(e);
+      return 'The AI backend threw a damn error: '+e.message+'. Check the endpoint logs and try again.';
+    }
+  }
+  return demoReply(text);
+}
+
+async function send(){
+  if(busy)return;
+  const text=$('promptInput').value.trim();
+  if(!text&&!activeFiles.length)return;
+  const files=activeFiles.slice();
+  const content=(text||'Please review the attached files.')+(files.length?'\n\n[Attachments selected: '+files.map(f=>f.name).join(', ')+']':'');
+  drawMessage('user',content);
+  $('promptInput').value='';
+  activeFiles=[];
+  renderFiles();
+  busy=true;
+  $('sendBtn').disabled=true;
+  const pending=document.createElement('div');
+  pending.className='message';
+  pending.id='pendingReply';
+  pending.innerHTML='<div class="avatar">M</div><div class="message-body muted">MOUTHY is thinking…</div>';
+  $('messages').append(pending);
+  const reply=await getReply(content);
+  pending.remove();
+  drawMessage('assistant',reply);
+  busy=false;
+  $('sendBtn').disabled=false;
+}
+
+function speakText(t){
+  if(!('speechSynthesis'in window))return toast('Speech output is unavailable in this browser.');
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  u.rate=1.02;
+  const voices=speechSynthesis.getVoices();
+  u.voice=voices.find(v=>/female/i.test(v.name))||null;
+  speechSynthesis.speak(u);
+}
+
+function closeSidebar(){
+  $('sidebar').classList.remove('open');
+  $('overlay').classList.remove('show');
+}
+
+$('menuBtn').onclick=()=>{
+  $('sidebar').classList.add('open');
+  $('overlay').classList.add('show');
+};
+$('overlay').onclick=closeSidebar;
+$('newChatBtn').onclick=()=>{newChat(true);closeSidebar()};
+$('sendBtn').onclick=send;
+$('promptInput').onkeydown=e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}
+};
+$('promptInput').oninput=()=>{
+  $('promptInput').style.height='auto';
+  $('promptInput').style.height=Math.min($('promptInput').scrollHeight,180)+'px';
+};
+
+document.querySelectorAll('[data-prompt]').forEach(b=>b.onclick=()=>{
+  $('promptInput').value=b.dataset.prompt;
+  $('promptInput').focus();
+});
+
+$('voiceBtn').onclick=()=>speakText('Hey, troublemaker. MOUTHY AI After Dark is ready. What the hell are we doing today?');
+$('searchChatBtn').onclick=()=>{
+  const q=prompt('Search your saved conversations:');
+  if(!q)return;
+  const c=getChats().find(c=>(c.title+' '+c.messages.map(m=>m.content).join(' ')).toLowerCase().includes(q.toLowerCase()));
+  if(c)openChat(c.id);
+  else toast('No matching saved conversation found.');
+};
+
+$('settingsNav').onclick=$('accountBtn').onclick=$('adminAccountBtn').onclick=()=>{
+  showOnly('accountScreen');
+  $('accountDetails').textContent=`Signed in as ${sessionUser?.email||'unknown'} · ${roleName()}.`;
+  closeSidebar();
+};
+
+$('closeAccountBtn').onclick=()=>showOnly('app');
+$('signOutBtn').onclick=async()=>{
+  if(sb)await sb.auth.signOut();
+  sessionUser=null;
+  profile=null;
+  role='user';
+  showOnly('authScreen');
+  setAuthMode('signin');
+};
+
+$('adminNav').onclick=async()=>{
+  if(!isOwner())return toast('Owner access only.');
+  showOnly('adminScreen');
+  await loadTesterRoster();
+};
+$('backChatBtn').onclick=()=>showOnly('app');
+
+async function loadTesterRoster(){
+  const host=$('testerRoster');
+  host.innerHTML='';
+  if(!sb){
+    host.innerHTML='<div class="empty">Connect Supabase and run setup.sql to manage testers securely.</div>';
+    return;
+  }
+  const {data,error}=await sb.from('mouthy_testers').select('id,email,display_name,status,created_at').order('created_at',{ascending:false});
+  if(error){
+    host.innerHTML='<div class="empty">Could not load tester roster: '+escapeHtml(error.message)+'</div>';
+    return;
+  }
+  if(!data?.length){
+    host.innerHTML='<div class="empty">No tester records yet. Add a tester above.</div>';
+    return;
+  }
+  data.forEach(t=>{
+    const row=document.createElement('div');
+    row.className='tester-row';
+    const info=document.createElement('div');
+    info.className='tester-info';
+    info.innerHTML=`<b>${escapeHtml(t.display_name||t.email)}</b><div class="small">${escapeHtml(t.email)}</div><span class="status">${escapeHtml(t.status)}</span>`;
+    const actions=document.createElement('div');
+    actions.className='tester-actions';
+    const toggle=document.createElement('button');
+    toggle.textContent=t.status==='approved'?'Revoke access':'Approve';
+    toggle.onclick=()=>changeTester(t.id,t.status==='approved'?'revoked':'approved');
+    const del=document.createElement('button');
+    del.className='danger';
+    del.textContent='Delete';
+    del.onclick=()=>deleteTester(t.id,t.email);
+    actions.append(toggle,del);
+    row.append(info,actions);
+    host.append(row);
+  });
+}
+
+function escapeHtml(s){
+  return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+async function addTester(email,name){
+  if(!isOwner())return toast('Owner access only.');
+  const {error}=await sb.from('mouthy_testers').upsert({
+    email:email.toLowerCase(),
+    display_name:name||null,
+    status:'approved',
+    updated_at:new Date().toISOString()
+  },{onConflict:'email'});
+  if(error)throw error;
+  await loadTesterRoster();
+  toast('Tester approved.');
+}
+
+async function changeTester(id,status){
+  if(!isOwner())return toast('Owner access only.');
+  const {error}=await sb.from('mouthy_testers').update({
+    status,
+    updated_at:new Date().toISOString()
+  }).eq('id',id);
+  if(error)return toast(error.message);
+  await loadTesterRoster();
+}
+
+async function deleteTester(id,email){
+  if(!isOwner()||!confirm('Delete tester record for '+email+'?'))return;
+  const {error}=await sb.from('mouthy_testers').delete().eq('id',id);
+  if(error)return toast(error.message);
+  await loadTesterRoster();
+}
+
+$('addTesterBtn').onclick=async()=>{
+  const email=$('testerEmail').value.trim().toLowerCase();
+  const name=$('testerName').value.trim();
+  if(!email.includes('@'))return toast('Enter a valid email.');
+  try{
+    await addTester(email,name);
+    $('testerEmail').value='';
+    $('testerName').value='';
+  }catch(e){toast(e.message)}
+};
+
+$('swapTesterBtn').onclick=async()=>{
+  if(!isOwner())return toast('Owner access only.');
+  const old=$('swapOldEmail').value.trim().toLowerCase();
+  const neu=$('swapNewEmail').value.trim().toLowerCase();
+  if(!old.includes('@')||!neu.includes('@'))return toast('Enter both email addresses.');
+  try{
+    const {error}=await sb.from('mouthy_testers').update({
+      status:'revoked',
+      updated_at:new Date().toISOString()
+    }).eq('email',old);
+    if(error)throw error;
+    await addTester(neu,'');
+    $('swapOldEmail').value='';
+    $('swapNewEmail').value='';
+    toast('Tester swapped.');
+  }catch(e){toast(e.message)}
+};
+
+$('signInBtn').onclick=signIn;
+$('signUpBtn').onclick=signUp;
+$('forgotBtn').onclick=resetPassword;
+$('authPassword').onkeydown=e=>{
+  if(e.key==='Enter')authMode==='signup'?signUp():signIn();
+};
+
+async function signIn(){
+  if(!sb)return authNotice('Setup required: add your Supabase URL and anon key in index.html, then run setup.sql.');
+  const email=$('authEmail').value.trim().toLowerCase();
+  const password=$('authPassword').value;
+  if(!email.includes('@')||!password)return authNotice('Enter your email and password.');
+  $('signInBtn').disabled=true;
+  try{
+    const {data,error}=await sb.auth.signInWithPassword({email,password});
+    if(error)throw error;
+    await enterApp(data.user);
+  }catch(e){authNotice(e.message)}
+  finally{$('signInBtn').disabled=false}
+}
+
+async function signUp(){
+  if(!sb)return authNotice('Setup required: add your Supabase URL and anon key in index.html, then run setup.sql.');
+  const email=$('authEmail').value.trim().toLowerCase();
+  const password=$('authPassword').value;
+  const name=$('authName').value.trim();
+  if(!email.includes('@'))return authNotice('Enter a valid email address.');
+  if(password.length<8)return authNotice('Use at least 8 characters for your password.');
+  $('signUpBtn').disabled=true;
+  try{
+    const {data,error}=await sb.auth.signUp({
+      email,
+      password,
+      options:{
+        data:{display_name:name||email.split('@')[0]},
+        emailRedirectTo:location.origin+location.pathname
+      }
+    });
+    if(error)throw error;
+    if(data.session&&data.user)await enterApp(data.user);
+    else authNotice('Account created. Check your email to confirm, then sign in.');
+  }catch(e){authNotice(e.message)}
+  finally{$('signUpBtn').disabled=false}
+}
+
+async function resetPassword(){
+  if(!sb)return authNotice('Configure Supabase first.');
+  const email=$('authEmail').value.trim().toLowerCase();
+  if(!email.includes('@'))return authNotice('Enter your email address first.');
+  const {error}=await sb.auth.resetPasswordForEmail(email,{
+    redirectTo:location.origin+location.pathname
+  });
+  authNotice(error?'If the account exists, a password reset email has been sent.': 'If the account exists, a password reset email has been sent.');
+}
+
+if(!READY){
+  authNotice('To enable real accounts, configure Supabase URL and anon key in index.html and run setup.sql. The account screen is intentionally disabled until then.');
+  $('signInBtn').disabled=$('signUpBtn').disabled=$('forgotBtn').disabled=true;
+}else if(!sb){
+  authNotice('Supabase library did not load. Check your connection and refresh.');
+}else{
+  sb.auth.onAuthStateChange((event,s)=>{
+    if(event==='SIGNED_OUT'){
+      showOnly('authScreen');
+      sessionUser=null;
+      role='user';
+    }else if(s?.user)enterApp(s.user);
+  });
+  sb.auth.getSession().then(({data})=>{
+    if(data.session?.user)enterApp(data.session.user);
+  });
+}
+
+setAuthMode('signin');
 })();
-</script></body></html>
+</script>
+</body>
+</html>
